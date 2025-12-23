@@ -1,0 +1,8 @@
+{
+  "git.ignoreLimitWarning": true,
+  "r.rpath.windows": "C:\\Program Files\\R\\R-4.3.3\\bin\\R.exe",
+  "r.rterm.windows": "C:\\Users\\70254057\\AppData\\Roaming\\Python\\Python312\\Scripts\\radian.exe",
+  "terminal.integrated.env.windows": {
+    "R_HOME": "C:\\Program Files\\R\\R-4.3.3"
+  }
+}
