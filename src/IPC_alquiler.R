@@ -20,15 +20,14 @@ for (year in period) {
     ecv <- fread(file_path)
 
     # Ensure types
-    eff[, weights := as.numeric(DB090)]
-    eff[, renta_alquiler := as.numeric(p2_31)]
-    eff[, reg_tenencia := factor(p2_19)]
+    ecv[, weights := as.numeric(DB090)]
+    ecv[, renta_alquiler := as.numeric(p2_31)]
+    ecv[, reg_tenencia := factor(p2_19)]
 
     dt <- svydesign(ids = ~1, data = ecv, weights = ecv$DB090)
 
     # Compute quantiles
     quant <- svymean(~renta_alquiler, subset(dt, reg_tenencia == "1"), na.rm = TRUE)
-
     obj <- c(obj, quant[[1]])
 }
 
