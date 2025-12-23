@@ -8,7 +8,7 @@ suppressPackageStartupMessages({
 })
 
 # Waves included
-period <- c(2002, 2005, 2008, 2011, 2014, 2017, 2020, 2022)
+period <- c(19:29)
 
 # Accumulators
 obj <- c()
@@ -16,15 +16,15 @@ summary_table <- data.table()
 
 for (year in period) {
     # Load per<U+2011>year mean<U+2011>imputed microdata
-    file_path <- sprintf("datasets/eff/%d-EFF.microdat.csv", year)
-    eff <- fread(file_path)
+    file_path <- sprintf("out/%.csv", year)
+    ecv <- fread(file_path)
 
     # Ensure types
-    eff[, facine3 := as.numeric(facine3)]
+    eff[, weights := as.numeric(DB090)]
     eff[, renta_alquiler := as.numeric(p2_31)]
     eff[, reg_tenencia := factor(p2_19)]
 
-    dt <- svydesign(ids = ~1, data = eff, weights = eff$facine3)
+    dt <- svydesign(ids = ~1, data = ecv, weights = ecv$DB090)
 
     # Compute quantiles
     quant <- svymean(~renta_alquiler, subset(dt, reg_tenencia == "1"), na.rm = TRUE)
